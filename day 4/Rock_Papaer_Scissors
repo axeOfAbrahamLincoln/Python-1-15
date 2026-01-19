@@ -1,0 +1,47 @@
+rock = '''Rock
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''Paper
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''Scissors
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+import random
+figures = [rock, paper, scissors]
+
+print("WELCOME TO THE GAME")
+print("rock = 0, paper = 1, scissors = 2")
+your_choice = int(input("What's your choice: "))
+if 0 <= your_choice <= 2:                               #user choice is a valid number (0,1,2)
+    print(f"\n {figures[your_choice]}")                 #print the choosen value from the list
+    comp_choice = random.choice(figures)                #random choice from list
+    print(f"Computer choice:\n\n{comp_choice}")         
+    comp_choice_int = figures.index(comp_choice)        #for a later comparison with the your_choice i use the index number of the list (0,1,2)
+if not 0 <= your_choice < 3:
+    print("Invalid number. You LOST!")
+elif comp_choice_int == 0 and your_choice == 2 or comp_choice_int == 1 and your_choice == 0 or comp_choice_int == 2 and your_choice == 1:
+    print("You LOST")
+elif comp_choice_int == 2 and your_choice == 0 or comp_choice_int == 0 and your_choice == 1 or comp_choice_int == 1 and your_choice == 2:
+    print("you WIN")
+else:
+    print("it is a TIE")
+
+

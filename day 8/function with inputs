@@ -1,0 +1,21 @@
+# def greet():
+#     print("Hello!")
+#     print("Nice to meet you.")
+#     print("My name is Adam.")
+# greet()
+
+# def greet_with_name(name):
+#     print(f"Hello {name}")
+#     print(f"How are you {name}?")
+
+# greet_with_name("Adam")
+# greet_with_name("Asia")
+
+def greet_with(name,location):
+    print(f"Hello {name}")
+    print(f"{name} is from {location}")
+
+greet_with("Adam","Kanjiza")
+
+
+greet_with(location="Poland", name="Asia")

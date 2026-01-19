@@ -1,0 +1,10 @@
+import random
+
+friends = ["Alice", "Bob", "Charlie", "David", "Emanuel"]
+
+# Option 1
+winner_index = random.randint(0,len(friends)-1)
+print(friends[winner_index])
+
+# Option 2
+print(random.choice(friends))

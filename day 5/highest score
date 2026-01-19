@@ -1,0 +1,19 @@
+student_scores = [150, 142, 185, 120, 171, 184, 149, 24, 59, 68, 199, 78, 65, 89, 86, 55, 91, 64, 89]
+
+# summ = 0
+# for score in student_scores:
+#     summ += score
+# print(summ)
+# total = sum(student_scores)
+# print(total)
+
+largest_number = max(student_scores)
+print(largest_number)
+
+largest_number_loop = 0
+for score in student_scores:
+    if score > largest_number_loop:
+        largest_number_loop = score
+print(largest_number_loop)
+
+
