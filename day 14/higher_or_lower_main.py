@@ -18,19 +18,16 @@ def random_dictionary(data_list):
 def print_insta_user(list_to_compare):
     print(f"Compare A: {list_to_compare[0]['name']} a(n) {list_to_compare[0]['description']} from {list_to_compare[0]['country']} ")
     print(art.vs)
-    print(f"Compare B: {list_to_compare[1]['name']} a(n) {list_to_compare[1]['description']} from {list_to_compare[1]['country']} ")
+    print(f"Against B: {list_to_compare[1]['name']} a(n) {list_to_compare[1]['description']} from {list_to_compare[1]['country']} ")
 
 def user_input(followers):
     user_choice = ""
     while user_choice not in("a","b"):
         user_choice = input("Who has more followers? Type 'A' or 'B' : ").lower()
-        print("\n"*20)
         if user_choice not in ("a","b"):
             print("Invalid input. Please type 'A' or 'B' ")
+    print("\n"*20)    
     return followers[0 if user_choice == "a" else 1]['follower_count']
-
-
-
 
 
 def gameplay():
@@ -40,12 +37,7 @@ def gameplay():
     while not is_game_over:
         print_score(user_score)
         print_insta_user(insta_users)
-        user_choice = input("Who has more followers? Type 'A' or 'B' : ").lower()
-        print("\n"*20)
-        if user_choice == "a":
-            user_choice = insta_users[0]['follower_count']
-        elif user_choice == "b":
-            user_choice = insta_users[1]['follower_count']
+        user_choice = user_input(insta_users)
         if user_choice == max(insta_users[0]['follower_count'],insta_users[1]['follower_count']):
             insta_users.remove(insta_users[0])
             insta_users.append(random.choice(game_data.data))
