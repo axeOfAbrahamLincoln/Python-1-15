@@ -19,7 +19,20 @@ def print_insta_user(list_to_compare):
     print(f"Compare A: {list_to_compare[0]['name']} a(n) {list_to_compare[0]['description']} from {list_to_compare[0]['country']} ")
     print(art.vs)
     print(f"Compare B: {list_to_compare[1]['name']} a(n) {list_to_compare[1]['description']} from {list_to_compare[1]['country']} ")
-    
+
+def user_input(followers):
+    user_choice = ""
+    while user_choice not in("a","b"):
+        user_choice = input("Who has more followers? Type 'A' or 'B' : ").lower()
+        print("\n"*20)
+        if user_choice not in ("a","b"):
+            print("Invalid input. Please type 'A' or 'B' ")
+    return followers[0 if user_choice == "a" else 1]['follower_count']
+
+
+
+
+
 def gameplay():
     user_score = 0
     is_game_over = False
