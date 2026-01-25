@@ -8,13 +8,14 @@ caffe_machine = {
     },
     'coin slot': {
         'coins': {
-            'quarter': {'count': 0, 'value': 0.25},
-            'dime':    {'count': 0, 'value': 0.10},
-            'nickel':  {'count': 0, 'value': 0.05},
-            'penny':   {'count': 0, 'value': 0.01},
+            'quarters': {'count': 0, 'value': 0.25},
+            'dimes':    {'count': 0, 'value': 0.10},
+            'nickels':  {'count': 0, 'value': 0.05},
+            'pennies':   {'count': 0, 'value': 0.01},
         },
-        'total amount': 0.0
-    }
+        'total in machine': 0.0,
+        'total user inserted':0.0
+    }de
 }
 
 
@@ -32,18 +33,21 @@ caffe_machine = {
 # filling()
 # print(caffe_machine)
 
-def iterate_dict(d, indent=0):
-    for key, value in d.items():
-        print(' ' * indent + str(key))
-        if isinstance(value, dict):
-            iterate_dict(value, indent + 2)
-        else:
-            print(' ' * (indent + 2) + str(value))
+
 
 
 
 def coffee(drink):
     return MENU[drink]
+def user_coins_inserted(machine):
+    print("Please insert coins.")
+    machine['coin slot']['total user inserted'] = 0.0
+    for key in machine['coin slot']['coins'].keys():
+        coins_inserted = int(input(f"How many {key}?: "))
+        coin_counter.append(coins_inserted)
+        machine['coin slot']['coins'][key]['count'] = coins_inserted
+        machine['coin slot']['total user inserted'] += coins_inserted * machine['coin slot']['coins'][key]['value']
+    machine['coin slot']['total in machine'] = machine['coin slot']['total user inserted']
 
 while True:
     input_drink = input("What would you like to drink? (Espresso, Latte, Cappuccino)? : ").lower()
@@ -52,23 +56,14 @@ while True:
         break
     except KeyError:
         print("Unknown drink! Please try again.")
+coin_counter = []
+
+user_coins_inserted(caffe_machine)
+
+print(f"Here is {caffe_machine['coin slot']['total user inserted'] - user_coffee['cost']} in change.")
 
 
-
-
-
-
-print("Please insert coins.")
-
-
-input_q = float(input("How many quarters?: "))* 0.25
-input_d = float(input("How many dimes?: "))*0.1
-input_n = float(input("How many nickles?: "))*0.05
-input_p = float(input("How many pennies?: "))*0.01
-
-sum_user_coins = input_q + input_d + input_n + input_p
- 
-print(f"Here is {sum_user_coins - MENU[input_drink]['cost']} in change.")
 print(f"Here is your {input_drink}! Enjoy!")
+print(caffe_machine)
 
 
