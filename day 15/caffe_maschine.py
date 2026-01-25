@@ -15,7 +15,7 @@ caffe_machine = {
         },
         'total in machine': 0.0,
         'total user inserted':0.0
-    }de
+    }
 }
 
 
@@ -47,7 +47,13 @@ def user_coins_inserted(machine):
         coin_counter.append(coins_inserted)
         machine['coin slot']['coins'][key]['count'] = coins_inserted
         machine['coin slot']['total user inserted'] += coins_inserted * machine['coin slot']['coins'][key]['value']
-    machine['coin slot']['total in machine'] = machine['coin slot']['total user inserted']
+    machine['coin slot']['total in machine'] += machine['coin slot']['total user inserted']
+
+def update_caffemachine(machine,inserted_coins):
+    machine['coin_slot'][]
+
+
+
 
 while True:
     input_drink = input("What would you like to drink? (Espresso, Latte, Cappuccino)? : ").lower()
