@@ -40,10 +40,22 @@ def iterate_dict(d, indent=0):
         else:
             print(' ' * (indent + 2) + str(value))
 
-# iterate_dict(caffe_machine)
 
 
-input_drink = input("What would you like to drink? (Espresso, Latte, Cappucciono)? :")
+def coffee(drink):
+    return MENU[drink]
+
+while True:
+    input_drink = input("What would you like to drink? (Espresso, Latte, Cappuccino)? : ").lower()
+    try:
+        user_coffee = coffee(input_drink)
+        break
+    except KeyError:
+        print("Unknown drink! Please try again.")
+
+
+
+
 
 
 print("Please insert coins.")
