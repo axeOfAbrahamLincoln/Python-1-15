@@ -2,19 +2,18 @@ from data import MENU
 
 caffe_machine = {
     'tank': {
-        'water': 0,
-        'milk': 0,
-        'coffee': 0,
+        'water': 500,
+        'milk': 500,
+        'coffee': 500,
     },
     'coin slot': {
         'coins': {
-            'quarters': {'count': 0, 'value': 0.25},
-            'dimes':    {'count': 0, 'value': 0.10},
-            'nickels':  {'count': 0, 'value': 0.05},
-            'pennies':   {'count': 0, 'value': 0.01},
+            'quarters': 0.25,
+            'dimes':    0.10,
+            'nickels':  0.05,
+            'pennies':  0.01,
         },
         'total in machine': 0.0,
-        'total user inserted':0.0
     }
 }
 
@@ -38,19 +37,20 @@ caffe_machine = {
 
 
 def coffee(drink):
-    return MENU[drink]
+    return MENU[drink], MENU[drink]['cost']
 def user_coins_inserted(machine):
     print("Please insert coins.")
-    machine['coin slot']['total user inserted'] = 0.0
-    for key in machine['coin slot']['coins'].keys():
+    user_total = 0.0
+    for key, value in machine['coin slot']['coins'].items():
         coins_inserted = int(input(f"How many {key}?: "))
-        coin_counter.append(coins_inserted)
-        machine['coin slot']['coins'][key]['count'] = coins_inserted
-        machine['coin slot']['total user inserted'] += coins_inserted * machine['coin slot']['coins'][key]['value']
-    machine['coin slot']['total in machine'] += machine['coin slot']['total user inserted']
-
-def update_caffemachine(machine,inserted_coins):
-    machine['coin_slot'][]
+        
+        user_total += coins_inserted * value
+    machine['coin slot']['total in machine'] += round(user_total,2)
+    return round(user_total,2)
+def update_caffemachine(machine,coffee):
+    machine['coin slot']['total in machine'] = coffee['cost']
+    
+    
 
 
 
@@ -58,16 +58,15 @@ def update_caffemachine(machine,inserted_coins):
 while True:
     input_drink = input("What would you like to drink? (Espresso, Latte, Cappuccino)? : ").lower()
     try:
-        user_coffee = coffee(input_drink)
+        user_coffee, coffe_cost = coffee(input_drink)
         break
     except KeyError:
         print("Unknown drink! Please try again.")
-coin_counter = []
+print(user_coffee)
+user_total = user_coins_inserted(caffe_machine)
 
-user_coins_inserted(caffe_machine)
-
-print(f"Here is {caffe_machine['coin slot']['total user inserted'] - user_coffee['cost']} in change.")
-
+print(f"Here is {user_total - coffe_cost:.2f} in change.")
+update_caffemachine(caffe_machine, user_coffee)
 
 print(f"Here is your {input_drink}! Enjoy!")
 print(caffe_machine)
