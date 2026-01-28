@@ -2,9 +2,9 @@ from data import MENU
 
 caffe_machine = {
     'tank': {
-        'water': 500,
-        'milk': 500,
-        'coffee': 500,
+        'water': 300,
+        'milk': 300,
+        'coffee': 300,
     },
     'coin slot': {
         'coins': {
@@ -13,7 +13,7 @@ caffe_machine = {
             'nickels':  0.05,
             'pennies':  0.01,
         },
-        'total in machine': 0.0,
+        'profit': 0.0,
     }
 }
 
@@ -37,18 +37,35 @@ caffe_machine = {
 
 
 def coffee(drink):
+    """Return the menu data and cost for the selected drink."""
     return MENU[drink], MENU[drink]['cost']
 def user_coins_inserted(machine):
+    """
+    Calculate the total value of coins inserted by the user.
+
+    Parameters
+    ----------
+    machine : dict
+        Machine configuration dictionary containing a 'coin slot' with
+        a 'coins' mapping coin names to their monetary values.
+
+    Returns
+    -------
+    float
+        Total amount of money inserted, rounded to two decimal places.
+    """
     print("Please insert coins.")
     user_total = 0.0
     for key, value in machine['coin slot']['coins'].items():
         coins_inserted = int(input(f"How many {key}?: "))
-        
         user_total += coins_inserted * value
-    machine['coin slot']['total in machine'] += round(user_total,2)
     return round(user_total,2)
-def update_caffemachine(machine,coffee):
-    machine['coin slot']['total in machine'] = coffee['cost']
+def report(machine,coffee):
+    for key,value in coffee['ingredients'].items():
+        if value > machine['tank'][key]:
+            print(f"not enough {key} in tank")
+            return False
+    return True
     
     
 
@@ -62,13 +79,11 @@ while True:
         break
     except KeyError:
         print("Unknown drink! Please try again.")
-print(user_coffee)
-user_total = user_coins_inserted(caffe_machine)
+if report(caffe_machine,user_coffee):
+    user_total = user_coins_inserted(caffe_machine)
+    if user_total > coffe_cost:
+        print(f"Here is {user_total - coffe_cost:.2f} in change.")
+        print(f"Here is your {input_drink}! Enjoy!")
 
-print(f"Here is {user_total - coffe_cost:.2f} in change.")
-update_caffemachine(caffe_machine, user_coffee)
-
-print(f"Here is your {input_drink}! Enjoy!")
-print(caffe_machine)
 
 
