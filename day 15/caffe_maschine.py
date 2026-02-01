@@ -66,24 +66,36 @@ def report(machine,coffee):
             print(f"not enough {key} in tank")
             return False
     return True
-    
-    
+def transaction():
+    print(f"Here is {user_total - coffe_cost:.2f} in change.")
+    caffe_machine['coin slot']['profit'] += user_total
+def make_coffe():
+    print(f"Here is your {input_drink}! Enjoy!")
+    for item in user_coffee['ingredients']:
+        caffe_machine['tank'][item] -= user_coffee['ingredients'][item]
+        
 
 
 
 
 while True:
-    input_drink = input("What would you like to drink? (Espresso, Latte, Cappuccino)? : ").lower()
-    try:
-        user_coffee, coffe_cost = coffee(input_drink)
-        break
-    except KeyError:
-        print("Unknown drink! Please try again.")
-if report(caffe_machine,user_coffee):
-    user_total = user_coins_inserted(caffe_machine)
-    if user_total > coffe_cost:
-        print(f"Here is {user_total - coffe_cost:.2f} in change.")
-        print(f"Here is your {input_drink}! Enjoy!")
+    
+    while True:
+        input_drink = input("What would you like to drink? (Espresso, Latte, Cappuccino)? : ").lower()
+        try:
+            user_coffee, coffe_cost = coffee(input_drink)
+            break
+        except KeyError:
+            print("Unknown drink! Please try again.")
+    if report(caffe_machine,user_coffee):
+        user_total = user_coins_inserted(caffe_machine)
+        if user_total > coffe_cost:
+            transaction()
+            make_coffe()
+        else:
+            print(f"Not enough money for that drink. Here is your ${user_total}")
+        
+        
 
 
 
